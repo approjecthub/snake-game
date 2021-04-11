@@ -1,36 +1,60 @@
 const inputDirection = {x:0, y:1}
 let prevInputDirection = ''
 
-window.addEventListener('keydown', e=>{
-    switch(e.key){
-        case 'ArrowUp':
-            if(prevInputDirection==='down')break
+const leftBtn = document.getElementById('left')
+const rightBtn = document.getElementById('right')
+const topBtn = document.getElementById('top')
+const downBtn = document.getElementById('down')
+
+function up(){
+    if(prevInputDirection==='down')return
             inputDirection.x = -1
             inputDirection.y = 0
             prevInputDirection = 'up'
-            break
-        case 'ArrowDown':
-            if(prevInputDirection==='up')break
+}
+
+function down(){
+    if(prevInputDirection==='up')return
             inputDirection.x = 1
             inputDirection.y = 0
             prevInputDirection = 'down'
-            break
-        case 'ArrowLeft':
-            if(prevInputDirection==='right')break
+}
+
+function left(){
+    if(prevInputDirection==='right')return
             inputDirection.x = 0
             inputDirection.y = -1
             prevInputDirection = 'left'
-            break
-        case 'ArrowRight':
-            if(prevInputDirection==='left')break
+}
+
+function right(){
+    if(prevInputDirection==='left')return
             inputDirection.x = 0
             inputDirection.y = 1
             prevInputDirection = 'right'
-            break
-        
-        
+}
+
+window.addEventListener('keydown', e=>{
+    if(e.key ==='ArrowUp'){
+        up()
     }
-})
+        else if(e.key === 'ArrowDown'){
+            down()
+        }
+        else if(e.key ===  'ArrowLeft'){
+            left()
+        }
+        else if (e.key ===  'ArrowRight'){
+            right()
+        }
+ 
+    })
+
+leftBtn.addEventListener('click',left)
+rightBtn.addEventListener('click', right)
+topBtn.addEventListener('click',up)
+downBtn.addEventListener('click', down)
+
 
 export function getDirection(){
     return {...inputDirection}
